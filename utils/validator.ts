@@ -9,12 +9,16 @@ export const createAccountSchema = yup
     lastName: yup.string().required("Last name is required"),
     email: yup
       .string()
+      .trim()
       .email("Email is not valid")
       .required("Email is required"),
     password: yup
       .string()
+      .trim()
       .min(6, "Password must be at least 6 characters.")
       .required("Password is required"),
+    confirmPassword: yup.string()
+     .oneOf([yup.ref('password'), null], 'Passwords must match'),
     phoneNumber: yup
       .string()
       .matches(phoneRegExp, {

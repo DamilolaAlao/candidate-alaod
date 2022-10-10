@@ -144,6 +144,24 @@ const Home: NextPage = () => {
             <div className="mt-4">
               <label
                 className="block mb-2 font-bold text-gray-600"
+                htmlFor="Confirm Password"
+              >
+                Confrim Password
+              </label>
+              <input
+                id="confirmPassword"
+                data-testid="confirmPassword"
+                className="block w-full px-4 py-4 text-gray-700 border-2 focus:border-info focus:outline-none"
+                type="password"
+                {...register("confirmPassword")}
+                placeholder="Confirm Password"
+                required
+              />
+              <p className="text-red-500">{errors.confirmPassword?.message}</p>
+            </div>
+            <div className="mt-4">
+              <label
+                className="block mb-2 font-bold text-gray-600"
                 htmlFor="Phone Number"
               >
                 Phone Number
@@ -163,7 +181,7 @@ const Home: NextPage = () => {
               id="submit"
               data-testid="submit"
               type="submit"
-              disabled={loading}
+              disabled={Object.values(errors).some((error) => Boolean(error))}
               className="border border-transparent bg-customCobalt-200 py-2 px-4 mt-2 text-sm font-medium text-white hover:bg-customMingo-200 disabled:bg-gray-400"
             >
               {loading ? "Loading..." : "Create Account"}
